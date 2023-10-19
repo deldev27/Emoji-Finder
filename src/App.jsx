@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../styles/App.css'
-import EmojiCard from './EmojiCard'
-import Pagination from './Pagination'
+import EmojiCard from './Components/EmojiCard'
+import Pagination from './Components/Pagination'
 
 const App = () => {
 	const [emoji, setEmoji] = useState([])
@@ -42,10 +42,7 @@ const App = () => {
 					onChange={changeSearch}
 				/>
 			</label>
-			<EmojiCard
-				search={search}
-				currentEmojiCards={currentEmojiCards}
-			/>
+			<EmojiCard search={search} currentEmojiCards={currentEmojiCards} />
 			<Pagination
 				emojiCardsPerPage={emojiCardsPerPage}
 				emoji={emoji.length}
