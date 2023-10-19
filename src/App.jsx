@@ -5,7 +5,7 @@ import Pagination from './Components/Pagination'
 const App = () => {
 	const [emoji, setEmoji] = useState([])
 	const [search, setSearch] = useState('')
-	const [currentPage, setCurrentPage] = useState(1 || 0)
+	const [currentPage, setCurrentPage] = useState(1)
 	const [emojiCardsPerPage, setEmojiCardsPerPage] = useState(12)
 
 	useEffect(() => {
