@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import '../styles/App.css'
 import EmojiCard from './Components/EmojiCard'
 import Pagination from './Components/Pagination'
+import './styles/App.css'
 
 const App = () => {
 	const [emoji, setEmoji] = useState([])
