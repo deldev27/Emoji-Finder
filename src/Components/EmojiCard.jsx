@@ -1,11 +1,16 @@
-const EmojiCard = ({ currentEmojiCards, search }) => {
+const EmojiCard = ({ currentEmojiCards, search, paginate }) => {
 	return (
 		<>
 			{currentEmojiCards == 0 ? (
-				<div className='emoji__error'>
-					Ошибка! <br />
-					Нажмите на кнопку с номером страницы, введите номер страницы или
-					введите 1 из ключевых слов!
+				<div className='error__block'>
+					<div className='error__text'>
+						НедоработОчка!
+						<br />
+						Нажмите на кнопку "Вернуться", либо выберите номер страницы вручную!
+					</div>
+					<button className='error__button' onClick={() => paginate(1)}>
+						Вернуться
+					</button>
 				</div>
 			) : (
 				<main className='emoji__block'>

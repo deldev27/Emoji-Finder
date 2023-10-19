@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import EmojiCard from './Components/EmojiCard'
 import Pagination from './Components/Pagination'
-import './styles/App.css'
 
 const App = () => {
 	const [emoji, setEmoji] = useState([])
 	const [search, setSearch] = useState('')
-	const [currentPage, setCurrentPage] = useState(1)
+	const [currentPage, setCurrentPage] = useState(1 || 0)
 	const [emojiCardsPerPage, setEmojiCardsPerPage] = useState(12)
 
 	useEffect(() => {
@@ -20,7 +19,14 @@ const App = () => {
 			})
 	}, [setEmoji])
 
-	const changeSearch = event => setSearch(event.target.value)
+	const changeSearch = event => {
+		setSearch(
+			event.target.value.replace(
+				/[0-9\+\-\=\~\!\@\#\$\%\^\&\*\(\)\_\"\№\;\%\:\?\{\}\<\>\[\]\;\'\,\|\\.\а-яА-ЯёЁ\/]/g,
+				'',
+			),
+		)
+	}
 
 	const indexOfLastPage = currentPage * emojiCardsPerPage
 	const indexOfFirstPage = indexOfLastPage - emojiCardsPerPage
@@ -42,7 +48,11 @@ const App = () => {
 					onChange={changeSearch}
 				/>
 			</label>
-			<EmojiCard search={search} currentEmojiCards={currentEmojiCards} />
+			<EmojiCard
+				search={search}
+				currentEmojiCards={currentEmojiCards}
+				paginate={paginate}
+			/>
 			<Pagination
 				emojiCardsPerPage={emojiCardsPerPage}
 				emoji={emoji.length}
