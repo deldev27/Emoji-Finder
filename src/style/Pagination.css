@@ -14,6 +14,8 @@
 }
 
 .pagination__input {
+	width: 62px;
+	height: 42px;
 	display: flex;
 	padding: 12px 14px;
 	align-items: flex-start;
@@ -46,6 +48,11 @@ input::-webkit-inner-spin-button {
 	background: var(--gray-white, #fff);
 	cursor: pointer;
 	text-decoration: none;
+}
+
+.pagination__link_active {
+	color: var(--gray-white, #fff);
+	background: var(--cyan-800, #055160);
 }
 
 .pagination__link:active {

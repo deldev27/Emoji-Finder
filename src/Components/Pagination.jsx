@@ -1,17 +1,27 @@
+import { useState } from 'react'
+
 const Pagination = ({
 	emojiCardsPerPage,
 	emoji,
 	paginate,
 	setEmojiCardsPerPage,
+	currentPage,
 }) => {
+	const [pageNumberLimit, setPageNumberLimit] = useState(5)
+	const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5)
+	const [minPageNumberLimit, setMinPageNumberLimit] = useState(0)
+
 	const pageNumbers = []
 
 	for (let i = 1; i <= Math.ceil(emoji / emojiCardsPerPage); i++) {
 		pageNumbers.push(i)
 	}
 
-	const pageSelection = event => {
-		paginate(event.target.value)
+	const nextPages = () => {
+		if (currentPage + 1 > maxPageNumberLimit) {
+			setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit)
+			setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit)
+		}
 	}
 
 	return (
@@ -21,13 +31,27 @@ const Pagination = ({
 					type='number'
 					className='pagination__input'
 					placeholder='First'
-					onChange={pageSelection}
+					onChange={event => paginate(event.target.value)}
 				/>
-				{pageNumbers.map(number => (
-					<a className='pagination__link' onClick={() => paginate(number)}>
-						{number}
-					</a>
-				))}
+				{pageNumbers.map(number => {
+					if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+						return (
+							<a
+								className={
+									currentPage == number
+										? 'pagination__link pagination__link_active'
+										: 'pagination__link'
+								}
+								onClick={() => {
+									nextPages()
+									paginate(number)
+								}}
+							>
+								{number}
+							</a>
+						)
+					}
+				})}
 				<a
 					className='pagination__link'
 					onClick={() => paginate(pageNumbers[pageNumbers.length - 1])}

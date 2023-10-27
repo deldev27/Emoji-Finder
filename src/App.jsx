@@ -12,7 +12,7 @@ const App = () => {
 		fetch('https://emoji.ymatuhin.workers.dev/')
 			.then(response => response.json())
 			.then(data => {
-				setEmoji(data.slice(0, -1700))
+				setEmoji(data)
 			})
 			.catch(error => {
 				console.error(error)
@@ -58,6 +58,7 @@ const App = () => {
 				emoji={emoji.length}
 				paginate={paginate}
 				setEmojiCardsPerPage={setEmojiCardsPerPage}
+				currentPage={currentPage}
 			/>
 		</>
 	)
